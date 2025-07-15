@@ -49,17 +49,14 @@ After successful compilation, execute the program using:
 
 ## Challenges Faced
 
-- **Managing Input Correctness and Buffer Issues:**  
-  Handling the mixture of `std::cin >>` and `std::getline()` input methods proved challenging. Careful clearing of the input buffer (e.g., using `std::cin.ignore()`) was crucial to prevent inputs from being skipped or unintended newline characters being read. The final solution adopted reading all inputs as strings and converting them.
+- **Designing and Organizing Classes with Proper Encapsulation:**  
+  One of the more significant challenges was designing the system architecture around multiple classes (`Student`, `classmanager`, `classmanagerSystem`) while effectively managing **data encapsulation** through private and public access specifiers. Balancing the need to protect internal data (`private` members) while providing sufficient public interfaces for interaction required careful planning. This included deciding **which methods should be public or private**, how to expose internal data safely (e.g., returning pointers or references for modification), and ensuring object state remained consistent and valid during updates.
 
-- **Modifying Objects Within a Container Correctly:**  
-  A significant challenge was ensuring that updates to class or student data were persistent. Initially, attempts involved getting copies of objects from the main container, leading to modifications on temporary copies rather than the original data. This was successfully resolved by implementing methods that return pointers to the actual objects stored within the `std::vector`, enabling direct and effective modification.
+- **Grouping and Managing Related Data:**  
+  Structuring the relationships between classes was challenging, especially representing how students belong to classes and how classes are managed together. Designing the container relationships (e.g., `vector` of students inside `classmanager`, and vector of classes inside `classmanagerSystem`) while providing clean and maintainable interfaces demanded attention to cohesive class responsibilities and minimizing coupling.
 
-- **Exception Safety for User Numeric Input:**  
-  Converting string inputs (from `std::getline()`) to numeric types (`int` using `std::stoi` and `float` using `std::stof`) presented a risk of runtime crashes if the user entered non-numeric data. Implementing robust `try-catch` blocks around these conversions was essential to gracefully handle invalid input and prevent program termination.
-
-- **Providing a Consistent and User-Friendly CLI Interface:**  
-  Crafting clear, concise, and unambiguous prompts and messages for the user interface required iterative refinement. Avoiding redundant output (e.g., double success messages) and ensuring consistent formatting (like line breaks and error message phrasing) was key to improving the overall user experience.
+- **Input Handling and Exception Safety:**  
+  Ensuring robust input handling through string input conversion and exception handling was also non-trivial, but secondary in comparison to the architectural challenges of class design.
 
 ## Notes and Future Improvements
 
